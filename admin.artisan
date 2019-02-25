@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker-compose exec admin php admin/artisan $*

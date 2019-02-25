@@ -1,0 +1,68 @@
+version: '2'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+      - "8088:8088"
+      - "8089:8089"
+    tty: true
+    volumes:
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./src:/var/www
+    restart: always
+
+  php:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    restart: always
+    volumes:
+      - ./src/front:/var/www/front:rw
+
+  admin:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    restart: always
+    volumes:
+      - ./src/admin:/var/www/admin:rw
+
+  
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./.docker/wordpress/Dockerfile
+    restart: always
+    volumes:
+      - ./src/wordpress:/var/www/wordpress:rw
+
+  # alioss:
+  #   image: php:7.3-fpm-alpine
+  #   restart: always
+  #   volumes:
+  #     - ./src/src-oss:/var/www/html:rw
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: domain
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./transfer:/docker-entrypoint-initdb.d
+
+  # rabbitmq:
+  #   image: rabbitmq:management-alpine
+  #   restart: always
+  #   ports:
+  #     - 15672:15672
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: admin
+  #     RABBITMQ_DEFAULT_PASS: admin
