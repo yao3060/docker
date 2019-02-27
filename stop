@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+docker-compose exec mysql mysqldump -uroot -proot domain > ./transfer/dump.sql
+tar -cvzf ./transfer/dump.sql.txz ./transfer/dump.sql
+rm -f ./transfer/dump.sql
+
+docker-compose down
