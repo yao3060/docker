@@ -14,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        // $svgIcons = json_decode(file_get_contents(resource_path('sass/octicons-data.json')), true);
+        // View::share('svgIcons', $svgIcons);
     }
 
     /**

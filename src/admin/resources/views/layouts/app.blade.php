@@ -10,12 +10,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -30,6 +30,7 @@
                 @else
                 @include('partials.sidebar')
                 <main class="pt-3 main-container">
+                    @include('partials.messages')
                     @yield('content')
                 </main>
                 @endguest
@@ -37,6 +38,9 @@
             </div>
         </div>
     </div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

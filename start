@@ -19,8 +19,8 @@ create () {
             break
         fi
     done
-    tar xJf transfer/dump.sql.txz  -C transfer/
-    docker exec -ti $DB_CONTAINER_ID sh -c "mysql -u root -proot domain < ./docker-entrypoint-initdb.d/dump.sql"
+    tar xJf transfer/dump.sql.txz transfer/
+    docker exec -ti $DB_CONTAINER_ID sh -c "mysql -u root -proot domain < /docker-entrypoint-initdb.d/dump.sql"
     rm -f transfer/dump.sql
 }
 

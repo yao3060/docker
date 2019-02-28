@@ -62,6 +62,12 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+
+                                <hr>
+                                <pre>
+                                superadministrator@app.com
+                                password
+                                </pre>
                             </div>
                         </div>
                     </form>

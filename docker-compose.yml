@@ -37,14 +37,18 @@ services:
     volumes:
       - ./src/admin:/var/www/admin:rw
 
-  
-  # wordpress:
-  #   build:
-  #     context: .
-  #     dockerfile: ./.docker/wordpress/Dockerfile
-  #   restart: always
-  #   volumes:
-  #     - ./src/wordpress:/var/www/wordpress:rw
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./.docker/wordpress/Dockerfile
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_NAME: domain
+      DB_USER: root
+      DB_PASSWORD: root
+    volumes:
+      - ./src/wordpress:/var/www/wordpress:rw
 
   # alioss:
   #   image: php:7.3-fpm-alpine
